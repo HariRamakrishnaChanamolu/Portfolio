@@ -1,0 +1,639 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ==========================================================================
+   1. GLOBAL VARIABLES & CONFIGURATION
+   ========================================================================== */
+:root {
+  /* Theme Colors */
+  --color-bg: #020617; /* Deep Space Black */
+  --color-bg-card: rgba(2, 6, 23, 0.95); /* 95% Solid Card Background */
+
+  --color-cyan: #00f3ff;
+  --color-pink: #ff00ff;
+
+  --color-text: #f1f5f9;
+  --color-text-dim: #94a3b8;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 100px;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+  line-height: 1.6;
+  color: var(--color-text);
+  min-height: 100vh;
+  overflow-x: hidden;
+
+  /* Background: Neon Ring + Dark Overlay (90% Dark) */
+  background:
+    linear-gradient(rgba(2, 6, 23, 0.85), rgba(2, 6, 23, 0.95)),
+    url('/bg-neon.jpg');
+  background-size: cover;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* ==========================================================================
+   2. GLOBAL UI ELEMENTS & TYPOGRAPHY
+   ========================================================================== */
+
+/* Headings & Text Colors */
+h2, h3, h4,
+.text-slate-800, .text-slate-700, .text-slate-600 {
+  color: var(--color-text) !important;
+}
+
+.text-slate-400 {
+  color: var(--color-text-dim) !important;
+}
+
+/* Base Card Styles (High Contrast/Opaque) */
+.project-card,
+.bg-white,
+.bg-slate-50,
+.bg-slate-800\/50,
+.bg-slate-100 {
+  background-color: var(--color-bg-card) !important;
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+  color: var(--color-text) !important;
+  border-radius: 16px;
+  transition: all 0.4s ease;
+}
+
+/* Inputs & Textareas */
+input, textarea {
+  background-color: rgba(15, 23, 42, 0.8) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  color: #fff !important;
+  transition: all 0.3s ease;
+}
+
+input:focus, textarea:focus {
+  outline: none;
+  border: 1px solid var(--color-cyan) !important;
+  box-shadow: 0 0 15px rgba(0, 243, 255, 0.3);
+}
+
+/* Generic Hover Effects (Rectangular Items) */
+.project-card:hover,
+.bg-white:hover,
+.bg-slate-50:hover,
+.bg-slate-800\/50:hover,
+input:hover,
+textarea:hover {
+  transform: translateY(-3px);
+  border: 1px solid transparent !important;
+  border-image: linear-gradient(to right, var(--color-cyan), var(--color-pink)) 1 !important;
+  box-shadow: -10px 0 30px rgba(0, 243, 255, 0.15), 10px 0 30px rgba(255, 0, 255, 0.15);
+}
+
+/* ==========================================================================
+   3. NAVIGATION (Floating Glass)
+   ========================================================================== */
+.glass-nav {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  width: max-content;
+  max-width: 90%;
+  padding: 0 40px;
+  height: 70px;
+
+  /* Gradient Border Style */
+  background:
+    linear-gradient(rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.9)) padding-box,
+    linear-gradient(to right, var(--color-cyan), var(--color-pink)) border-box;
+  border: 2px solid transparent;
+
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  border-radius: 50px;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  /* Animation */
+  opacity: 0;
+  will-change: transform, opacity;
+  animation: slideDownCentered 1s ease-out 0s forwards;
+}
+
+.nav-pill-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 30px;
+  color: var(--color-text-dim);
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+}
+
+/* Nav Hover Effects */
+.nav-pill-link:hover,
+.nav-pill-link.active,
+a[href].rounded-full:hover,
+button:hover,
+.bg-slate-100:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1) !important;
+  transform: scale(1.1);
+  box-shadow: -5px 0 15px rgba(0, 243, 255, 0.6), 5px 0 15px rgba(255, 0, 255, 0.6);
+  cursor: pointer;
+}
+
+a:hover > .lucide {
+  filter: drop-shadow(-2px 0 8px var(--color-cyan)) drop-shadow(2px 0 8px var(--color-pink));
+  stroke: #ffffff;
+  transform: scale(1.15);
+}
+
+@media (max-width: 768px) {
+  .glass-nav { width: 95%; padding: 0 1rem; height: 60px; }
+  .nav-text { display: none; }
+}
+
+/* ==========================================================================
+   4. BUTTONS
+   ========================================================================== */
+.btn-neon {
+  position: relative;
+  background:
+    linear-gradient(#020617, #020617) padding-box,
+    linear-gradient(to right, var(--color-cyan), var(--color-pink)) border-box;
+  border: 2px solid transparent;
+  border-radius: 50px;
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.btn-neon:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: -5px 0 20px rgba(0, 243, 255, 0.6), 5px 0 20px rgba(255, 0, 255, 0.6);
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+}
+
+/* ==========================================================================
+   5. HERO SECTION & TEXT ANIMATIONS
+   ========================================================================== */
+.hero {
+  min-height: 100vh;
+  background: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920') center/cover fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  box-shadow: inset 0 -100px 100px -50px #020617;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(2, 6, 23, 0.3);
+  z-index: 0;
+}
+
+.hero > div { z-index: 1; }
+
+.section {
+  position: relative;
+  width: 100vw;
+  min-height: 100vh;
+  padding: 120px 0;
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Name Animation (Static Glow) */
+.text-shimmer {
+  display: inline-block;
+  background: linear-gradient(to right, #ffffff, #cffafe);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 0 20px rgba(0, 243, 255, 0.4));
+  opacity: 0;
+  animation: simple-fade-in 1.5s ease-out forwards;
+}
+
+/* Typewriter Effect */
+.typing-cursor {
+  border-right: 3px solid var(--color-cyan);
+  text-shadow: 0 0 10px var(--color-cyan);
+  white-space: nowrap;
+  overflow: hidden;
+  width: 0;
+  display: inline-block;
+  animation: typing 3s steps(30, end) 0.5s forwards, blink-caret 0.75s step-end infinite;
+}
+
+/* Reveal Helpers */
+.logo-intro-rise {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: drop-shadow(-5px 0 20px rgba(0, 243, 255, 0.4)) drop-shadow(5px 0 20px rgba(255, 0, 255, 0.4));
+}
+
+.sync-reveal { opacity: 0; animation: simple-fade-in 1s ease-out 0.2s forwards; }
+.final-reveal { opacity: 0; animation: simple-fade-in 1s ease-out 1.5s forwards; }
+.reveal { opacity: 0; transform: translateY(50px); transition: all 0.8s ease-out; }
+.reveal.active { opacity: 1; transform: translateY(0); }
+
+/* ==========================================================================
+   6. RESUME / EXPERIENCE SECTION
+   ========================================================================== */
+.resume-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@media (min-width: 1024px) {
+  .resume-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+  }
+}
+
+.resume-card {
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  backdrop-filter: blur(12px);
+  transition: all 0.3s ease;
+  position: relative;
+  margin-bottom: 2rem;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.resume-card:hover {
+  transform: translateY(-5px);
+  background:
+    linear-gradient(rgba(30, 41, 59, 0.95), rgba(30, 41, 59, 0.95)) padding-box,
+    linear-gradient(to right, var(--color-cyan), var(--color-pink)) border-box;
+  border: 2px solid transparent;
+  box-shadow:
+    -10px 0 30px rgba(0, 243, 255, 0.2),
+     10px 0 30px rgba(255, 0, 255, 0.2);
+}
+
+/* Experience Specifics */
+.exp-card { padding: 2rem; }
+.exp-card::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 4px;
+  background: linear-gradient(to bottom, var(--color-cyan), var(--color-pink));
+  z-index: 2;
+}
+
+/* Education Specifics */
+.edu-card { padding: 0; }
+.edu-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(to right, var(--color-cyan), var(--color-pink));
+  z-index: 2;
+}
+
+.edu-image-container {
+  height: 250px;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.edu-image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease, filter 0.5s ease;
+  filter: grayscale(0%);
+}
+
+.edu-card:hover .edu-image-container img {
+  transform: scale(1.1);
+  filter: grayscale(0%);
+}
+
+.edu-content { padding: 1.5rem 2rem; }
+
+/* ==========================================================================
+   7. SKILLS & TECH CARDS
+   ========================================================================== */
+
+/* Small Skill Icon Cards */
+.skill-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 110px;
+  height: 110px;
+  padding: 12px;
+  background-color: rgba(15, 23, 42, 0.4);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  transition: all 0.3s ease;
+  cursor: default;
+  position: relative;
+  z-index: 1;
+}
+
+.skill-card:hover {
+  transform: translateY(-5px) scale(1.05);
+  background:
+    linear-gradient(rgba(30, 41, 59, 0.95), rgba(30, 41, 59, 0.95)) padding-box,
+    linear-gradient(to bottom right, var(--color-cyan), var(--color-pink)) border-box;
+  border: 2px solid transparent;
+  box-shadow:
+    -5px 0 20px rgba(0, 243, 255, 0.4),
+    5px 0 20px rgba(255, 0, 255, 0.4);
+}
+
+.skill-card h4 {
+  margin-top: 10px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  line-height: 1.2;
+  color: #cbd5e1;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.skill-card:hover h4 {
+  color: #fff;
+  text-shadow: 0 0 8px var(--color-cyan);
+}
+
+.skill-card img {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+
+.skill-card:hover .skill-icon {
+  color: var(--color-pink);
+  filter: drop-shadow(0 0 8px var(--color-pink));
+}
+
+/* Large Category Boxes */
+.tech-category-box {
+  background-color: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  transition: all 0.4s ease;
+  position: relative;
+  z-index: 0;
+}
+
+.tech-category-box:hover {
+  transform: translateY(-5px);
+  background:
+    linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.85)) padding-box,
+    linear-gradient(to right, var(--color-cyan), var(--color-pink)) border-box;
+  border: 2px solid transparent;
+  box-shadow:
+    -15px 0 40px rgba(0, 243, 255, 0.15),
+    15px 0 40px rgba(255, 0, 255, 0.15);
+}
+
+/* ==========================================================================
+   8. HOLOGRAPHIC 3D SECTION
+   ========================================================================== */
+.holo-stage {
+  position: relative;
+  height: 800px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  overflow: visible;
+  /* Removed perspective so the cylinder renders flat and solid */
+}
+
+/* The Platform Container */
+.holo-platform {
+  position: relative;
+  width: 500px;
+  height: 120px;
+  bottom: 20px;
+  z-index: 1;
+}
+
+/* THE SOLID CYLINDER BASE */
+.holo-platform-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%; /* Perfect Oval */
+
+  /* 1. The Surface */
+  background: radial-gradient(circle at center, #80ff80 0%, #00cc00 100%);
+  border: 2px solid #00aa00;
+  z-index: 2;
+
+  /* 2. THE SIDES (Created by stacking shadows downward)
+     This fills the gap and makes it look like a solid puck */
+  box-shadow:
+    0 5px 0 #006600,
+    0 10px 0 #005500,
+    0 15px 0 #004400,
+    0 20px 0 #003300,
+    0 25px 0 #002200,
+    /* The Glow on the floor */
+    0 50px 80px rgba(0, 0, 0, 0.9);
+}
+
+/* Hide the old side element because the shadow above handles it perfectly now */
+.holo-platform-side {
+  display: none;
+}
+
+/* The Beam */
+.holo-beam {
+  position: absolute;
+  bottom: 50px;
+  width: 100%;
+  height: 900px;
+  background: radial-gradient(
+    ellipse at 50% 100%,
+    rgba(0, 255, 0, 0.15) 0%,
+    rgba(0, 255, 0, 0.05) 40%,
+    transparent 70%
+  );
+  filter: blur(10px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* The Swarm */
+.floating-skills-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+  gap: 40px;
+  max-width: 1200px;
+  margin-bottom: 200px;
+  z-index: 10;
+  perspective: 1000px;
+}
+
+.float-icon {
+  width: 90px; height: 90px;
+  background: transparent;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  animation: floatUp 6s ease-in-out infinite;
+}
+
+.float-icon img {
+  width: 60px; height: 60px;
+  object-fit: contain;
+  filter: drop-shadow(0 5px 10px rgba(0,0,0,0.8));
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.float-icon span {
+  margin-top: 10px;
+  font-size: 0.85rem;
+  color: #fff;
+  font-weight: bold;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.3s ease;
+  background: rgba(0,0,0,0.8);
+  padding: 4px 10px;
+  border-radius: 20px;
+  border: 1px solid rgba(0, 255, 0, 0.5);
+  pointer-events: none;
+}
+
+/* Float Icon Hover States */
+.float-icon:hover {
+  z-index: 100;
+  animation-play-state: paused;
+}
+.float-icon:hover img { transform: scale(1.6); }
+.float-icon:hover span { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 768px) {
+  .holo-platform { width: 300px; height: 80px; }
+  .holo-platform-side { top: 20px; }
+  .float-icon { width: 60px; height: 60px; }
+  .float-icon img { width: 40px; height: 40px; }
+}
+
+/* ==========================================================================
+   9. KEYFRAMES & GLOBAL ANIMATIONS
+   ========================================================================== */
+
+@keyframes simple-fade-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: var(--color-cyan); }
+}
+
+@keyframes slideDownCentered {
+  0% { opacity: 0; transform: translate(-50%, -100%); }
+  100% { opacity: 1; transform: translate(-50%, 0); }
+}
+
+
+@keyframes zoomIn {
+  from { transform: scale(0.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes floatUp {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes tracking-in-expand {
+  0% { letter-spacing: -0.5em; opacity: 0; }
+  40% { opacity: 0.6; }
+  100% { opacity: 1; letter-spacing: 0.25em; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* Legacy Animations (Kept for compatibility) */
+@keyframes reveal-name {
+  0% { background-position: 100% center; }
+  14% { background-position: 100% center; }
+  100% { background-position: 0% center; }
+}
+
+/* ==========================================================================
+   10. CUSTOM UTILITIES
+   ========================================================================== */
+
+/* Gradient for the emblem text */
+.emblem-text-gradient {
+  fill: transparent; /* Hide default fill */
+  /* Brighter neon gradient: Cyan -> Neon Pink -> Cyan */
+  background: linear-gradient(to right, #00f3ff, #ff00ff, #00f3ff);
+  background-size: 200% auto; /* Setup for shimmer animation */
+  -webkit-background-clip: text;
+  background-clip: text;
+  /* Use drop-shadow filter for a strong, glowing neon effect */
+  filter: drop-shadow(0 0 5px rgba(0, 243, 255, 0.8)) drop-shadow(0 0 8px rgba(255, 0, 255, 0.6));
+  /* Optional: Adds a slow, subtle color shift animation */
+  animation: textShimmer 5s linear infinite;
+}
+
+/* Keyframes for the text color shimmer */
+@keyframes textShimmer {
+  to {
+    background-position: 200% center;
+  }
+}
