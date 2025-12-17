@@ -3,8 +3,9 @@
 @tailwind utilities;
 
 /* ==========================================================================
-   1. GLOBAL VARIABLES & CONFIGURATION
+   SECTION 1: GLOBAL VARIABLES & ROOT CONFIG
    ========================================================================== */
+
 :root {
   /* Theme Colors */
   --color-bg: #020617; /* Deep Space Black */
@@ -42,10 +43,9 @@ body {
 }
 
 /* ==========================================================================
-   2. GLOBAL UI ELEMENTS & TYPOGRAPHY
+   SECTION 2: TYPOGRAPHY & TEXT UTILITIES
    ========================================================================== */
 
-/* Headings & Text Colors */
 h2, h3, h4,
 .text-slate-800, .text-slate-700, .text-slate-600 {
   color: var(--color-text) !important;
@@ -54,6 +54,33 @@ h2, h3, h4,
 .text-slate-400 {
   color: var(--color-text-dim) !important;
 }
+
+/* Name Animation (Static Glow) */
+.text-shimmer {
+  display: inline-block;
+  background: linear-gradient(to right, #ffffff, #cffafe);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 0 20px rgba(0, 243, 255, 0.4));
+  opacity: 0;
+  animation: simple-fade-in 1.5s ease-out forwards;
+}
+
+/* Gradient for the emblem text */
+.emblem-text-gradient {
+  fill: transparent;
+  background: linear-gradient(to right, #00f3ff, #ff00ff, #00f3ff);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  filter: drop-shadow(0 0 5px rgba(0, 243, 255, 0.8)) drop-shadow(0 0 8px rgba(255, 0, 255, 0.6));
+  animation: textShimmer 5s linear infinite;
+}
+
+/* ==========================================================================
+   SECTION 3: GLOBAL UI COMPONENTS (CARDS, INPUTS, BUTTONS)
+   ========================================================================== */
 
 /* Base Card Styles (High Contrast/Opaque) */
 .project-card,
@@ -97,9 +124,31 @@ textarea:hover {
   box-shadow: -10px 0 30px rgba(0, 243, 255, 0.15), 10px 0 30px rgba(255, 0, 255, 0.15);
 }
 
+/* Button Styles */
+.btn-neon {
+  position: relative;
+  background:
+    linear-gradient(#020617, #020617) padding-box,
+    linear-gradient(to right, var(--color-cyan), var(--color-pink)) border-box;
+  border: 2px solid transparent;
+  border-radius: 50px;
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.btn-neon:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: -5px 0 20px rgba(0, 243, 255, 0.6), 5px 0 20px rgba(255, 0, 255, 0.6);
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+}
+
 /* ==========================================================================
-   3. NAVIGATION (Floating Glass)
+   SECTION 4: NAVIGATION (FLOATING GLASS)
    ========================================================================== */
+
 .glass-nav {
   position: fixed;
   top: 20px;
@@ -168,31 +217,9 @@ a:hover > .lucide {
 }
 
 /* ==========================================================================
-   4. BUTTONS
+   SECTION 5: HERO & LAYOUT
    ========================================================================== */
-.btn-neon {
-  position: relative;
-  background:
-    linear-gradient(#020617, #020617) padding-box,
-    linear-gradient(to right, var(--color-cyan), var(--color-pink)) border-box;
-  border: 2px solid transparent;
-  border-radius: 50px;
-  color: #fff;
-  font-weight: bold;
-  font-size: 1.1rem;
-  transition: all 0.3s ease;
-  overflow: hidden;
-}
 
-.btn-neon:hover {
-  transform: translateY(-3px) scale(1.05);
-  box-shadow: -5px 0 20px rgba(0, 243, 255, 0.6), 5px 0 20px rgba(255, 0, 255, 0.6);
-  text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
-}
-
-/* ==========================================================================
-   5. HERO SECTION & TEXT ANIMATIONS
-   ========================================================================== */
 .hero {
   min-height: 100vh;
   background: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920') center/cover fixed;
@@ -225,29 +252,6 @@ a:hover > .lucide {
   align-items: center;
 }
 
-/* Name Animation (Static Glow) */
-.text-shimmer {
-  display: inline-block;
-  background: linear-gradient(to right, #ffffff, #cffafe);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  filter: drop-shadow(0 0 20px rgba(0, 243, 255, 0.4));
-  opacity: 0;
-  animation: simple-fade-in 1.5s ease-out forwards;
-}
-
-/* Typewriter Effect */
-.typing-cursor {
-  border-right: 3px solid var(--color-cyan);
-  text-shadow: 0 0 10px var(--color-cyan);
-  white-space: nowrap;
-  overflow: hidden;
-  width: 0;
-  display: inline-block;
-  animation: typing 3s steps(30, end) 0.5s forwards, blink-caret 0.75s step-end infinite;
-}
-
 /* Reveal Helpers */
 .logo-intro-rise {
   opacity: 1;
@@ -260,9 +264,21 @@ a:hover > .lucide {
 .reveal { opacity: 0; transform: translateY(50px); transition: all 0.8s ease-out; }
 .reveal.active { opacity: 1; transform: translateY(0); }
 
+/* Typewriter Effect */
+.typing-cursor {
+  border-right: 3px solid var(--color-cyan);
+  text-shadow: 0 0 10px var(--color-cyan);
+  white-space: nowrap;
+  overflow: hidden;
+  width: 0;
+  display: inline-block;
+  animation: typing 3s steps(30, end) 0.5s forwards, blink-caret 0.75s step-end infinite;
+}
+
 /* ==========================================================================
-   6. RESUME / EXPERIENCE SECTION
+   SECTION 6: RESUME & EXPERIENCE
    ========================================================================== */
+
 .resume-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -345,7 +361,7 @@ a:hover > .lucide {
 .edu-content { padding: 1.5rem 2rem; }
 
 /* ==========================================================================
-   7. SKILLS & TECH CARDS
+   SECTION 7: SKILLS & HOLOGRAPHIC 3D
    ========================================================================== */
 
 /* Small Skill Icon Cards */
@@ -408,7 +424,7 @@ a:hover > .lucide {
   filter: drop-shadow(0 0 8px var(--color-pink));
 }
 
-/* Large Category Boxes */
+/* Tech Category Boxes */
 .tech-category-box {
   background-color: rgba(15, 23, 42, 0.6);
   backdrop-filter: blur(12px);
@@ -430,9 +446,7 @@ a:hover > .lucide {
     15px 0 40px rgba(255, 0, 255, 0.15);
 }
 
-/* ==========================================================================
-   8. HOLOGRAPHIC 3D SECTION
-   ========================================================================== */
+/* Hologram Stage */
 .holo-stage {
   position: relative;
   height: 800px;
@@ -442,7 +456,6 @@ a:hover > .lucide {
   align-items: center;
   justify-content: flex-end;
   overflow: visible;
-  /* Removed perspective so the cylinder renders flat and solid */
 }
 
 /* The Platform Container */
@@ -454,36 +467,27 @@ a:hover > .lucide {
   z-index: 1;
 }
 
-/* THE SOLID CYLINDER BASE */
+/* The Solid Cylinder Base */
 .holo-platform-top {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  border-radius: 50%; /* Perfect Oval */
-
-  /* 1. The Surface */
+  border-radius: 50%;
   background: radial-gradient(circle at center, #80ff80 0%, #00cc00 100%);
   border: 2px solid #00aa00;
   z-index: 2;
-
-  /* 2. THE SIDES (Created by stacking shadows downward)
-     This fills the gap and makes it look like a solid puck */
   box-shadow:
     0 5px 0 #006600,
     0 10px 0 #005500,
     0 15px 0 #004400,
     0 20px 0 #003300,
     0 25px 0 #002200,
-    /* The Glow on the floor */
     0 50px 80px rgba(0, 0, 0, 0.9);
 }
 
-/* Hide the old side element because the shadow above handles it perfectly now */
-.holo-platform-side {
-  display: none;
-}
+.holo-platform-side { display: none; }
 
 /* The Beam */
 .holo-beam {
@@ -561,7 +565,7 @@ a:hover > .lucide {
 }
 
 /* ==========================================================================
-   9. KEYFRAMES & GLOBAL ANIMATIONS
+   SECTION 8: ANIMATION KEYFRAMES
    ========================================================================== */
 
 @keyframes simple-fade-in {
@@ -584,7 +588,6 @@ a:hover > .lucide {
   100% { opacity: 1; transform: translate(-50%, 0); }
 }
 
-
 @keyframes zoomIn {
   from { transform: scale(0.9); opacity: 0; }
   to { transform: scale(1); opacity: 1; }
@@ -606,32 +609,12 @@ a:hover > .lucide {
   50% { transform: translateY(-10px); }
 }
 
-/* Legacy Animations (Kept for compatibility) */
 @keyframes reveal-name {
   0% { background-position: 100% center; }
   14% { background-position: 100% center; }
   100% { background-position: 0% center; }
 }
 
-/* ==========================================================================
-   10. CUSTOM UTILITIES
-   ========================================================================== */
-
-/* Gradient for the emblem text */
-.emblem-text-gradient {
-  fill: transparent; /* Hide default fill */
-  /* Brighter neon gradient: Cyan -> Neon Pink -> Cyan */
-  background: linear-gradient(to right, #00f3ff, #ff00ff, #00f3ff);
-  background-size: 200% auto; /* Setup for shimmer animation */
-  -webkit-background-clip: text;
-  background-clip: text;
-  /* Use drop-shadow filter for a strong, glowing neon effect */
-  filter: drop-shadow(0 0 5px rgba(0, 243, 255, 0.8)) drop-shadow(0 0 8px rgba(255, 0, 255, 0.6));
-  /* Optional: Adds a slow, subtle color shift animation */
-  animation: textShimmer 5s linear infinite;
-}
-
-/* Keyframes for the text color shimmer */
 @keyframes textShimmer {
   to {
     background-position: 200% center;
