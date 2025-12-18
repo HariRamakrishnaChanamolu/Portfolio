@@ -198,7 +198,7 @@ export default function App() {
   // --- SIDE EFFECTS (Data Fetching & ScrollSpy) ---
 
   useEffect(() => {
-    fetch('http://localhost:8080/api/portfolio')
+    fetch('/api/portfolio')
       .then(res => res.json())
       .then(setData)
       .catch(err => console.error("Backend Offline", err));
