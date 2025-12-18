@@ -1,12 +1,20 @@
-# Stage 1: Build the app
-FROM maven:3.9.6-eclipse-temurin-21 AS build
-WORKDIR /app
-COPY . .
-RUN mvn clean package -DskipTests
+# Use direct Java 21 JDK for both building and running
+FROM eclipse-temurin:21-jdk-alpine
 
-# Stage 2: Run the app
-FROM eclipse-temurin:17-jdk-alpine
 WORKDIR /app
-COPY --from=build /app/target/*.jar app.jar
+
+# Copy all files
+COPY . .
+
+# Give permission to execute the build script
+RUN chmod +x mvnw
+
+# Build the project using the internal JDK 21
+RUN ./mvnw clean package -DskipTests
+
+# Move the created JAR to a simple name
+RUN cp target/*.jar app.jar
+
+# Run the app
 EXPOSE 8080
 ENTRYPOINT ["java","-jar","app.jar"]
