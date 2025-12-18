@@ -1,20 +1,20 @@
-# Use direct Java 21 JDK for both building and running
+# 1. Use Java 21 Alpine image (Lightweight & Fast)
 FROM eclipse-temurin:21-jdk-alpine
+
+# 2. Install Maven manually (Bypasses the missing mvnw file issue)
+RUN apk add --no-cache maven
 
 WORKDIR /app
 
-# Copy all files
+# 3. Copy your project files
 COPY . .
 
-# Give permission to execute the build script
-RUN chmod +x mvnw
+# 4. Build the project using the installed 'mvn' command (Not ./mvnw)
+RUN mvn clean package -DskipTests
 
-# Build the project using the internal JDK 21
-RUN ./mvnw clean package -DskipTests
-
-# Move the created JAR to a simple name
+# 5. Move the jar file
 RUN cp target/*.jar app.jar
 
-# Run the app
+# 6. Run the application
 EXPOSE 8080
 ENTRYPOINT ["java","-jar","app.jar"]
