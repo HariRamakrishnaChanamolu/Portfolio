@@ -290,7 +290,8 @@ export default function App() {
     <div className="flex flex-col min-h-screen bg-transparent relative">
 
       {/* --- NAVIGATION --- */}
-      <nav className={`glass-nav justify-center relative z-30 ${blurClass}`}>
+
+     <nav className={`glass-nav justify-center fixed top-4 left-1/2 -translate-x-1/2 z-[60] transition-all duration-700 ${(showEasterEgg || activeModal) ? '-translate-y-32 opacity-0 pointer-events-none' : 'translate-y-0 opacity-100'}`}>
         <div className="flex items-center gap-1 sm:gap-2">
           {navItems.map((item) => (
             <a key={item.id} href={`#${item.id}`} className={`nav-pill-link ${activeSection === item.id ? 'active' : ''}`}>
@@ -299,7 +300,7 @@ export default function App() {
             </a>
           ))}
         </div>
-        <div className="flex gap-3 pl-4 border-l border-white/10">
+        <div className="hidden md:flex gap-3 pl-4 border-l border-white/10">
           <a href="https://www.linkedin.com/in/hari-ramakrishna-chanamolu-4b86311a0" target="_blank" rel="noreferrer" className="text-slate-400 hover:text-blue-400 transition transform hover:scale-110"><Linkedin size={20} /></a>
           <a href={data.profile?.github} target="_blank" rel="noreferrer" className="text-slate-400 hover:text-white transition transform hover:scale-110"><Github size={20} /></a>
         </div>
@@ -308,7 +309,7 @@ export default function App() {
       <main className="w-full flex flex-col gap-40">
 
         {/* --- HERO SECTION --- */}
-        <section id="home" className="hero relative">
+        <section id="home" className="hero relative min-h-screen pb-20 flex flex-col justify-center">
 
           {/* Overlay */}
           <div
@@ -390,11 +391,21 @@ export default function App() {
               </div>
             </div>
 
-            {/* Call to Actions */}
+{/* --- RESTORED BUTTONS --- */}
             <div className={`final-reveal mt-8 flex justify-center gap-8 relative z-10 ${blurClass}`}>
               <a href="#projects" className="btn-neon px-10 py-4 text-lg">View Work</a>
               <a href="#contact" className="btn-neon px-10 py-4 text-lg">Contact Me</a>
             </div>
+            {/* Call to Actions */}
+{/* Mobile Social Icons */}
+<div className={`mt-10 flex justify-center gap-8 md:hidden relative z-20 ${blurClass}`}>
+  <a href="https://www.linkedin.com/in/hari-ramakrishna-chanamolu-4b86311a0" target="_blank" rel="noreferrer" className="text-slate-400 hover:text-blue-400">
+    <Linkedin size={32} />
+  </a>
+  <a href={data.profile?.github} target="_blank" rel="noreferrer" className="text-slate-400 hover:text-white">
+    <Github size={32} />
+  </a>
+</div>
 
           </div>
         </section>
@@ -418,7 +429,18 @@ export default function App() {
                     <p className="text-slate-300 text-lg leading-relaxed font-light">{data.profile?.summary}</p>
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-12">
-                    <div className="flex items-center gap-2"><ChevronRight size={16} className="text-cyan-400" /><span className="text-white font-bold w-24">Website:</span><span className="text-slate-300">{data.profile?.website}</span></div>
+<div className="flex items-center gap-2">
+  <ChevronRight size={16} className="text-cyan-400" />
+  <span className="text-white font-bold w-24">Website:</span>
+  <a
+    href={data.profile?.website}
+    target="_blank"
+    rel="noreferrer"
+    className="text-slate-300 hover:text-cyan-400 transition-colors border-b border-transparent hover:border-cyan-400 cursor-pointer"
+  >
+    {data.profile?.website}
+  </a>
+</div>
                     <div className="flex items-center gap-2"><ChevronRight size={16} className="text-cyan-400" /><span className="text-white font-bold w-24">Degree:</span><span className="text-slate-300">{data.profile?.degree}</span></div>
                     <div className="flex items-center gap-2"><ChevronRight size={16} className="text-cyan-400" /><span className="text-white font-bold w-24">Phone:</span><span className="text-slate-300">{data.profile?.phone}</span></div>
                     <div className="flex items-center gap-2"><ChevronRight size={16} className="text-cyan-400" /><span className="text-white font-bold w-24">Email:</span><span className="text-slate-300 truncate">{data.profile?.email}</span></div>
@@ -432,12 +454,12 @@ export default function App() {
           </section>
 
           {/* --- SKILLS SECTION --- */}
-          <section id="skills" className="section bg-transparent">
+          <section id="skills" className="section bg-transparent pt-32">
             <div style={wideContainerStyle}>
-              <div className="text-center mb-10">
-                <h2 className="text-5xl font-bold text-slate-100 mb-4 inline-block border-b-4 border-cyan-400 pb-2">Technical Arsenal</h2>
+              <div className="text-center mb-24 md:mb-10">
+                <h2 className="text-3xl md:text-5xl font-bold text-slate-100 mb-16 inline-block border-b-4 border-cyan-400 pb-2">Technical Arsenal</h2>
               </div>
-              <div className="holo-stage">
+              <div className="holo-stage mt-10 md:mt-0">
                 <div className="floating-skills-grid">
                   {(() => {
                     const allSkillsList = [];
@@ -578,19 +600,30 @@ export default function App() {
                                 <span className="font-mono text-sm tracking-wide">PROPRIETARY SOURCE • LOCKED</span>
                               </div>
                             ) : (
-                              <a
-                                href={data.projects[activeProjectIndex].projectUrl || data.projects[activeProjectIndex].url || "#"}
-                                target="_blank"
-                                rel="noreferrer"
-                                className="relative px-8 py-3 flex items-center gap-3 group overflow-hidden rounded-full bg-slate-900 border border-cyan-500/60 hover:border-pink-500/80 transition-all duration-300 shadow-[0_0_20px_rgba(0,243,255,0.2)] hover:shadow-[0_0_30px_rgba(236,72,153,0.4)]"
-                              >
-                                <div className="absolute inset-0 bg-gradient-to-r from-cyan-600/20 to-pink-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                                <Globe size={20} className="text-cyan-400 group-hover:text-pink-400 transition-colors group-hover:rotate-12" />
-                                <span className="relative z-10 font-bold tracking-wide text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-cyan-300 group-hover:to-pink-300">
-                                  ACCESS RESEARCH PAPER
-                                </span>
-                                <ExternalLink size={16} className="text-pink-400 opacity-50 group-hover:opacity-100 transition-opacity" />
-                              </a>
+              <a
+                href={data.projects[activeProjectIndex].projectUrl || data.projects[activeProjectIndex].url || "#"}
+                target="_blank"
+                rel="noreferrer"
+                className="relative px-8 py-3 flex items-center gap-3 group overflow-hidden rounded-full bg-slate-900 border border-cyan-500/60 hover:border-pink-500/80 transition-all duration-300 shadow-[0_0_20px_rgba(0,243,255,0.2)] hover:shadow-[0_0_30px_rgba(236,72,153,0.4)]"
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-cyan-600/20 to-pink-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+                {/* DYNAMIC ICON: Shows Github for code, Globe for research */}
+                {data.projects[activeProjectIndex].category.includes("Research") ? (
+                  <Globe size={20} className="text-cyan-400 group-hover:text-pink-400 transition-colors group-hover:rotate-12" />
+                ) : (
+                  <Github size={20} className="text-cyan-400 group-hover:text-pink-400 transition-colors group-hover:rotate-12" />
+                )}
+
+                {/* DYNAMIC TEXT */}
+                <span className="relative z-10 font-bold tracking-wide text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-cyan-300 group-hover:to-pink-300">
+                  {data.projects[activeProjectIndex].category.includes("Research")
+                    ? "ACCESS RESEARCH PAPER"
+                    : "SOURCE CODE"}
+                </span>
+
+                <ExternalLink size={16} className="text-pink-400 opacity-50 group-hover:opacity-100 transition-opacity" />
+              </a>
                             )}
                           </div>
                         </div>

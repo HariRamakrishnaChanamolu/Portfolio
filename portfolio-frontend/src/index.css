@@ -168,7 +168,7 @@ textarea:hover {
   -webkit-backdrop-filter: blur(16px);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
   border-radius: 50px;
-  z-index: 1000;
+  z-index: 50;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -618,5 +618,21 @@ a:hover > .lucide {
 @keyframes textShimmer {
   to {
     background-position: 200% center;
+  }
+}
+/* ==========================================================================
+   SECTION 9: MOBILE HELPERS
+   ========================================================================== */
+
+/* Force toggle button to be on top of everything */
+.z-max {
+  z-index: 10000 !important;
+  position: relative;
+}
+
+/* Ensure orbit system doesn't block clicks on mobile nav */
+@media (max-width: 768px) {
+  .hero .relative.z-50 {
+    z-index: 10 !important; /* Lower the orbit system z-index on mobile */
   }
 }

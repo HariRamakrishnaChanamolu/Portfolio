@@ -25,7 +25,7 @@ public class PortfolioController {
                 "Hari Ramakrishna Chanamolu",
                 "HRC",
                 "Software Developer | Aspiring AI Security Engineer",
-                "I am a software developer with 3 years of experience specializing in secure, cloud-native systems. Currently transitioning into AI Safety and Adversarial Machine Learning research. My expertise bridges the gap between robust software engineering (Java/Spring) and cutting-edge security research (AI Vulnerability Analysis).",
+                "I am a results-driven Software Developer with ample experience in architecting secure, cloud-native distributed systems. My professional journey has been defined by bridging the gap between robust software engineering (Java/Spring Boot) and cutting-edge security research. Having successfully delivered enterprise-grade solutions for global corporations, I am now expanding my expertise into AI Safety and Adversarial Machine Learning, aiming to build resilient systems that can withstand the evolving threat landscape of the future.",
                 "hariramakrishna29.ch@gmail.com",
                 "+1 513-512-8620",
                 "Round Rock, Texas, USA",
@@ -34,7 +34,7 @@ public class PortfolioController {
                 "https://linkedin.com/",
                 "https://github.com/" ,
                  "27",
-                "www.hari-portfolio.com"
+                "https://hrk-portfolio.onrender.com/"
 
         );
 
@@ -57,31 +57,39 @@ public class PortfolioController {
                 "React.js", "Next.js", "HTML5 & CSS3", "AI Safety", "Adversarial ML"
         ));
 
-// 3. PROJECTS (The "Archives")
+// ==========================================
+        // 3. PROJECTS SECTION (The Archives)
+        // ==========================================
         List<Project> projects = Arrays.asList(
                 new Project(
                         "Docker Security Analysis",
                         "Research Paper",
-                        "Conducted a large-scale empirical analysis of 50 popular Docker images. Identified 2,264 vulnerabilities and correlated 'image staleness' with security debt (R²=0.972). Established a quantitative risk model for container ecosystems.",
-                        "https://doi.org/10.5281/zenodo.17516215" // <--- ADDED LINK HERE
+                        "Conducted a large-scale empirical analysis of 50 popular Docker images to understand the state of container security. Identified over 2,264 vulnerabilities and correlated 'image staleness' with security debt (R²=0.972). Established a quantitative risk model for container ecosystems to help DevOps teams prioritize patching.",
+                        "https://doi.org/10.5281/zenodo.17516215"
                 ),
                 new Project(
                         "Adversarial AI Taxonomy (SoK)",
                         "Research Paper",
-                        "Authored a 'Systematization of Knowledge' paper developing a Unified Threat Model for AI. Systematically classified attacks into Evasion, Poisoning, and Inference, analyzing the 'Robustness-Accuracy-Privacy' trilemma.",
-                        "https://doi.org/10.5281/zenodo.17449778" // <--- ADDED LINK HERE
+                        "Authored a 'Systematization of Knowledge' paper developing a Unified Threat Model for Artificial Intelligence. Systematically classified attacks into Evasion, Poisoning, and Inference categories. Analyzed the 'Robustness-Accuracy-Privacy' trilemma to provide a framework for building secure AI models.",
+                        "https://doi.org/10.5281/zenodo.17449778"
+                ),
+                new Project(
+                        "Portfolio Monorepo", // <--- NEW ADDITION
+                        "Full Stack Web",
+                        "A modern, full-stack personal portfolio website showcasing my professional journey. Built as a Monorepo using a robust Spring Boot backend to serve a highly optimized React (Vite) frontend. The application is containerized using Docker (Multi-stage builds) for consistency and deployed on Render Cloud. It features a responsive neon-glassmorphism UI, interactive holographic elements, and a centralized API architecture.",
+                        "https://github.com/HariRamakrishnaChanamolu/Portfolio" // Make sure this link matches your repo
                 ),
                 new Project(
                         "Vulnerability Mgmt Platform",
                         "Dell (Enterprise)",
-                        "Developed a cloud-based platform to track and manage software vulnerabilities (CVEs). Integrated automated security scans and built triage workflows, giving security teams real-time visibility into risks.",
-                        null // <--- No link for Enterprise projects (or use "#")
+                        "Designed and developed a comprehensive, cloud-native Vulnerability Management Platform for enterprise security. This system aggregates security data from multiple scanners to track software vulnerabilities (CVEs) across global infrastructure. Built using a Microservices architecture with Java 17 and Spring Boot, it features an event-driven ingestion pipeline and a dynamic React.js frontend. Implemented Role-Based Access Control (RBAC) via Keycloak for secure tenant isolation and orchestrated deployment on AWS EKS using Kubernetes, significantly reducing the Mean Time to Remediate (MTTR) for critical security patches.",
+                        "#" // No link for Enterprise
                 ),
                 new Project(
                         "Real-Time Data Pipeline",
                         "Paycom (Enterprise)",
-                        "Built an event-driven integration platform using Apache Kafka to replace legacy polling. Ingested events from Workday (HCM) to downstream microservices, reducing latency and improving data consistency.",
-                        null // <--- No link for Enterprise projects
+                        "Engineered a high-throughput, Real-Time Data Integration Pipeline to synchronize critical Human Capital Management (HCM) data. Moved the legacy architecture from inefficient polling to a modern event-driven model using Apache Kafka and Spring Cloud Stream. This solution handled high-volume employee events from Workday to downstream consumers with eventual consistency. Optimized database interactions using Hibernate/JPA and implemented L2 Caching with Redis to handle peak loads, ensuring seamless data availability and system resilience.",
+                        "#" // No link for Enterprise
                 )
         );
 
@@ -90,13 +98,13 @@ public class PortfolioController {
                 new Experience(
                         "Full Stack Java Developer",
                         "Dell Technologies",
-                        "Aug 2023 - Oct 2025",
+                        "August  2023 - December 2025",
                         "Architected backend microservices for a CVE Vulnerability Management platform using Java 21 & Spring Boot. Designed secure REST APIs and a dynamic React.js/Next.js frontend with RBAC (Keycloak). Integrated automated security tools and managed AWS deployments via Docker/Kubernetes."
                 ),
                 new Experience(
                         "Software Developer",
                         "Paycom",
-                        "Aug 2022 - Jul 2023",
+                        "August 2022 - July 2023",
                         "Designed a real-time event-driven integration platform using Apache Kafka to sync Workday employee events. Engineered microservices for idempotent processing and optimized database performance (L2 Cache) on AWS RDS."
                 )
 
@@ -108,13 +116,13 @@ public class PortfolioController {
                 new Experience(
                         "Masters in Information Science",
                         "Trine University, Detroit",
-                        "Aug 2021 - May 2023",
+                        "August 2021 - May 2023",
                         "Focus: Data Science, Big Data, and Data Mining."
                 ),
                 new Experience(
                         "Bachelors in ECE",
                         "VR Siddhartha Engineering College",
-                        "May 2016 - Oct 2020",
+                        "May 2016 - October 2020",
                         "Focus: Embedded Systems and Electronics."
                 )
         );
